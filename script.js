@@ -17,6 +17,6 @@ function displayTodo(todoName) {
   const templateClone = template.content.cloneNode(true);
   const textElement = templateClone.querySelector("[data-list-item-text]");
   textElement.innerText = todoName;
-  list.appendChild(textElement);
+  list.appendChild(templateClone);
   console.log(templateClone);
 }
