@@ -1,5 +1,3 @@
-//ajout note
-
 const form = document.querySelector("#new-todo-form")
 const todoInput = document.querySelector("#todo-input")
 const list = document.querySelector("#list")
@@ -13,6 +11,11 @@ todos.forEach(displayTodo)
 
 list.addEventListener("change", (e) => {
   if (!e.target.matches("[data-list-item-checkbox]")) return
+  const parent = e.target.closest(".list-item")
+  const todoId = parent.dataset.todoId
+  const todo = todos.find((t) => t.id === todoId)
+  todo.complete = e.target.checked
+  saveTodos()
 })
 
 form.addEventListener("submit", (e) => {
