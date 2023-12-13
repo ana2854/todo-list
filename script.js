@@ -40,6 +40,8 @@ function displayTodo(todo) {
   listItem.dataset.todoId = todo.id
   const textElement = templateClone.querySelector("[data-list-item-text]")
   textElement.innerText = todo.name
+  const checkbox = templateClone.querySelector("[data-list-item-checkbox]")
+  checkbox.checked = todo.complete
   list.appendChild(templateClone)
 }
 
