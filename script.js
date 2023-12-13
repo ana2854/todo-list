@@ -6,7 +6,7 @@ const template = document.querySelector("#list-item-template")
 LOCAL_STORAGE_PREFIX = "TODO_LIST"
 TODOS_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-todos`
 
-const todos = loadTodos()
+let todos = loadTodos()
 todos.forEach(displayTodo)
 
 list.addEventListener("change", (e) => {
@@ -16,6 +16,16 @@ list.addEventListener("change", (e) => {
   const todo = todos.find((t) => t.id === todoId)
   todo.complete = e.target.checked
   saveTodos()
+})
+
+list.addEventListener("click", (e) => {
+  if (!e.target.matches("[data-button-delete]")) return
+ const parent = e.target.closest(".list-item")
+ const todoId = parent.dataset.todoId
+ parent.remove()
+ todos = todos.filter(todo => todo.id !== todoId)
+ saveTodos()
+
 })
 
 form.addEventListener("submit", (e) => {
@@ -52,4 +62,8 @@ function loadTodos() {
 
 function saveTodos() {
   localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos))
+}
+
+function deleteTodos() {
+ localStorage.removeItem(TODOS_STORAGE_KEY)
 }
